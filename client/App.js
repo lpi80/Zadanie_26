@@ -11,7 +11,7 @@ const socket = io('/');
 
 class App extends Component {
     constructor(props) {
-        super(props);
+        super();
         this.state = { users: [], messages: [], text: '', name: '' };
     }
 
@@ -41,9 +41,7 @@ class App extends Component {
     }
 
     render() {
-        return this.state.name !== '' ? (
-            this.renderLayout()
-        ) : this.renderUserForm() // zaimplementowane w późniejszej części
+        return this.state.name !== '' ? (this.renderLayout()) : this.renderUserForm()
     }
 
     renderLayout() {
@@ -52,23 +50,16 @@ class App extends Component {
                 <div className={styles.AppHeader}>
                     <div className={styles.AppTitle}>
                         ChatApp
-               </div>
+                    </div>
                     <div className={styles.AppRoom}>
                         App room
-               </div>
+                    </div>
                 </div>
                 <div className={styles.AppBody}>
-                    <UsersList
-                        users={this.state.users}
-                    />
+                    <UsersList users={this.state.users} />
                     <div className={styles.MessageWrapper}>
-                        <MessageList
-                            messages={this.state.messages}
-                        />
-                        <MessageForm
-                            onMessageSubmit={message => this.handleMessageSubmit(message)}
-                            name={this.state.name}
-                        />
+                        <MessageList messages={this.state.messages} />
+                        <MessageForm onMessageSubmit={message => this.handleMessageSubmit(message)} name={this.state.name} />
                     </div>
                 </div>
             </div>
